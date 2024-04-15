@@ -14,6 +14,9 @@ import userRoutes from "./routes/users.js"
 import { register } from "./controllers/auth.js";
 import {createPost} from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
+import User from "./models/User.js";
+import Post from "./models/Post.js";
+import {users,posts} from "./data/index.js";
 
 
 
@@ -57,6 +60,12 @@ mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 }).then(()=>{
-    app.listen(PORT,()=> console.log(`Server corriendo en el port: ${PORT}`))
+    app.listen(PORT,()=> console.log(`Server corriendo en el port: ${PORT}`));
+
+
+    //INYECTAR INFORMACION (insertar informacion) 
+    //!! cada vez que se corra el server metera la info 
+    //User.insertMany(users);
+    //Post.insertMany(posts);
 }).catch((error)=>console.log(`${error} NO SE PUDO CONECTAR AL SERVER `))
 
