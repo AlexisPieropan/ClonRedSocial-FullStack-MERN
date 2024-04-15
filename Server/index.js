@@ -12,6 +12,8 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
 import { register } from "./controllers/auth.js";
+import {createPost} from "./controllers/posts.js";
+import { verifyToken } from "./middleware/auth.js";
 
 
 
@@ -36,13 +38,14 @@ const storage = multer.diskStorage({
         cb(null,"public/assets");
     },
     filename:function(req,file,cb){
-        cb(null,file.originalname)
+        cb(null,file.originalname);
     }
 });
 const upload = multer({storage});
 
 //RUTAS CON ARCHIVOS
-app.post("/auth/register",upload.single("picture"),register)
+app.post("/auth/register",upload.single("picture"),register);
+app.post("/posts",verifyToken,upload.single("picture"),createPost);
 
 //RUTAS
 app.use("/auth",authRoutes);
