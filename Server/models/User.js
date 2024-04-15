@@ -37,7 +37,7 @@ const UserSchema= new mongoose.Schema(
             default:"",
         },
         friends:{
-            type:array,
+            type:Array,
             default:[],
         },
         location:String,
@@ -47,5 +47,5 @@ const UserSchema= new mongoose.Schema(
     },{timestamps:true});  //el timestaps nos dara fecha de tiempo cuando se actualiza,crea etc
 
     //FORMA DE EXPORTAR EL MODELO
-    const User = Mongoose.model("User",UserSchema);
+    const User = mongoose.model("User",UserSchema);
     export default User;
